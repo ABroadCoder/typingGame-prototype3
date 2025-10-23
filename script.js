@@ -4779,7 +4779,34 @@ const listenKeys = function () {
 
       // Stage 2: Typing out the response
 
-      // Escape functionality
+          // Enter key functionality
+          if (e.key === 'Enter' && currentTypingIndex === selectedResponse.length) {
+            if (selectedResponseIndex === 0) {
+              currentDialogueStep =
+                dialogue[currentDialogueStep].answers.first.next;
+              console.log(`currentDialogueStep value is ${currentDialogueStep}`);
+              displayText();
+              return;
+            }
+    
+            if (selectedResponseIndex === 1) {
+              currentDialogueStep =
+                dialogue[currentDialogueStep].answers.second.next;
+              console.log(`currentDialogueStep value is ${currentDialogueStep}`);
+              displayText();
+              return;
+            }
+    
+            if (selectedResponseIndex === 2) {
+              currentDialogueStep =
+                dialogue[currentDialogueStep].answers.third.next;
+              console.log(`currentDialogueStep value is ${currentDialogueStep}`);
+              displayText();
+              return;
+            }
+          }
+
+      // Escape key functionality
 
       if (e.key === 'Escape' && typingContainerShowing === true) {
         // Reset all response displays
@@ -4898,32 +4925,7 @@ const listenKeys = function () {
         currentTypingIndex--;
       }
 
-      // Enter functionality
-      if (e.key === 'Enter' && currentTypingIndex === selectedResponse.length) {
-        if (selectedResponseIndex === 0) {
-          currentDialogueStep =
-            dialogue[currentDialogueStep].answers.first.next;
-          console.log(`currentDialogueStep value is ${currentDialogueStep}`);
-          displayText();
-          return;
-        }
 
-        if (selectedResponseIndex === 1) {
-          currentDialogueStep =
-            dialogue[currentDialogueStep].answers.second.next;
-          console.log(`currentDialogueStep value is ${currentDialogueStep}`);
-          displayText();
-          return;
-        }
-
-        if (selectedResponseIndex === 2) {
-          currentDialogueStep =
-            dialogue[currentDialogueStep].answers.third.next;
-          console.log(`currentDialogueStep value is ${currentDialogueStep}`);
-          displayText();
-          return;
-        }
-      }
 
       // Letter and punctuation functionality
       if (
@@ -5034,12 +5036,15 @@ const listenKeys = function () {
         if (currentTypingIndex < selectedResponse.length) {
           currentTypingIndex++;
         }
+
         if (currentTypingIndex === selectedResponse.length) {
           // Display Enter key graphic
           showElement(
             document.querySelector(`.submit-container-${selectedResponseIndex}`)
           );
         }
+
+
         console.log(`New currentTypingIndex: ${currentTypingIndex}`);
       }
     });
